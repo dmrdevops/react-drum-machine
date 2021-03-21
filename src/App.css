@@ -9,6 +9,11 @@
   max-width: 700px;
   border: 2px solid black;
   display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  border-radius: 1em;
+  background: center/cover url('https://i.pinimg.com/564x/99/0f/d3/990fd331468a6fdab327d0fe7d4d7e96.jpg')
+
 }
 
 .pad-bank {
@@ -18,15 +23,43 @@
   place-items: center;
   padding: 2em;
   gap: 2em 2em;
+  
 }
 
-.control-container {
-  border-left: 2px solid black;
+.side-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+}
+
+#display {
+  background-color: black;
+  color: white;
+  height: 8rem;
+  margin: .5rem 2.5rem 0 .5rem;
+  border-radius: 3px;
+  font-size: 3.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls-container {
   min-width: 300px;
+  
+  padding: 2em 2em 2em 0;
+ 
+  display: grid;
+  grid: [row1-start] "power bank" 75px [row1-end]
+        [row2-start] "volume volume" 75px  [row2-end]
+        /1fr 1fr;
+
 }
 
 .drum-pad {
   border: 2px solid black;
+  background-color: whitesmoke;
+  border-radius: 5px;
   width: 85px;
   height: 85px;
   display: flex;
@@ -35,62 +68,107 @@
   font-size: 2.5em;
 }
 
-#display {
-  background-color: cornsilk;
-  border-bottom: 2px solid black;
-  min-height: 60px;
-  font-size: 3.5em;
+
+
+
+.control-volume {
+  grid-area: volume;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  font-size: 2.25em;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 .25em;
 }
 
-.select {
-  margin: auto;
+.control-volume input {
+  background-color: black;
+  -webkit-appearance: none;  /* Override webkit styles */
+  appearance: none;
+  width: 100%;
+  height: 1rem;
+  margin: 1.25rem 0;
+  background: black; /* Grey background */
+  outline: none; /* Remove outline */
+  border-radius: 50px;
+}
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.control-volume input::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 2rem; /* Set a specific slider handle width */
+  height: 2rem; /* Slider handle height */
+  background: rgb(0, 140, 255); /* Green background */
+  border-radius: 50px;
+  cursor: pointer; /* Cursor on hover */
+}
+
+.control-volume input::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: rgb(0, 140, 255); /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+
+
+/*Toggle switches*/
+.selector {
+  margin: 1rem;
   border: 1px solid black;
-  width: 50px;
-  height: 20px;
+  width: 7rem;
+  height: 2.5rem;
   padding: 1px;
   background-color: black;
+  border-radius: 50px;
 }
 
 .inner {
-  width: 23px;
-  height: 19px;
-  background: blue;
+  width: 50%;
+  height: 100%;
+  background: rgb(0, 140, 255);
   border: 1px solid black;
   box-sizing: border-box;
   cursor: pointer;
+  border-radius: 50px;
 }
 
-.control {
-  width: 100px;
-  margin: auto;
+
+.control-power {
+  grid-area: power;
+  font-size: 2.25em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 }
 
-.outer-select {
-  margin: auto;
-  border: 1px solid black;
-  width: 50px;
-  height: 20px;
-  padding: 1px;
-  background-color: black;
+.control-bank {
+  grid-area: bank;
+  font-size: 2.25em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 }
-
-.inner-select {
-  width: 23px;
-  height: 19px;
-  background: blue;
-  border: 1px solid black;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
 
 
 @media (max-width: 700px) {
   .main-container {
-    flex-direction: column-reverse;
-    
+    flex-direction: column-reverse; 
+  }
+  
+  #display {
+    margin: 2rem 2rem 0 2rem;
+  }
+  .controls-container {
+    padding: 2em 2em 0 2em;
+    grid: [row1-start] "power bank" .75fr [row1-end]
+          [row2-start] "volume volume" .75fr  [row2-end]
+    /1fr 1fr;
+
   }
 }
