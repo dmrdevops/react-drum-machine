@@ -8,7 +8,7 @@ import Display from './Display';
 
 class DrumMachine extends React.Component {
   state = {
-    currentVolume: 0.5,
+    currentVolume: 0.75,
     display: "",
     keyPressed: false,
     kitSelected: kitA,
@@ -32,7 +32,6 @@ class DrumMachine extends React.Component {
   }
 
   changeVolume = (event) => {
-
     this.setState({
       currentVolume: event.target.value,
     });

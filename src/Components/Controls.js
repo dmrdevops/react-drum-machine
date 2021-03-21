@@ -12,10 +12,12 @@ const Controls = (props) => {
           />
         <Bank
           changeSoundBank={props.changeSoundBank} 
-          kitSelected={props.kitSelected} />
+          kitSelected={props.kitSelected} 
+          powerState={props.powerState} />
         <Volume
           changeVolume={props.changeVolume}
-          currentVolume={props.currentVolume} />
+          currentVolume={props.currentVolume}
+          powerState={props.powerState} />
       </div>
     )
 }

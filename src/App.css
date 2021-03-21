@@ -48,10 +48,10 @@
   min-width: 300px;
   
   padding: 2em 2em 2em 0;
- 
+  
   display: grid;
-  grid: [row1-start] "power bank" 75px [row1-end]
-        [row2-start] "volume volume" 75px  [row2-end]
+  grid: [row1-start] "power bank" 1fr [row1-end]
+        [row2-start] "volume volume" 1fr  [row2-end]
         /1fr 1fr;
 
 }
@@ -114,26 +114,39 @@
 
 
 /*Toggle switches*/
-.selector {
+/* .selector {
+  display: flex;
+  justify-content: center;
   margin: 1rem;
   border: 1px solid black;
-  width: 7rem;
-  height: 2.5rem;
+  width: 5rem;
+  height: 5rem;
   padding: 1px;
   background-color: black;
   border-radius: 50px;
-}
+} */
 
-.inner {
-  width: 50%;
-  height: 100%;
+.knob {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  margin-top: 1rem;
   background: rgb(0, 140, 255);
-  border: 1px solid black;
+  /* border: 1px solid black; */
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: 50px;
+  border-radius: 50%;
 }
 
+.indicator {
+  position: absolute;
+  top: 50%;
+  width: 50%;
+  height: 3px;
+  background-color: black;
+  transform-origin: 100%;
+  transform: rotate(135deg);
+}
 
 .control-power {
   grid-area: power;
@@ -153,6 +166,12 @@
   justify-content: center;
   align-items: center;
   font-weight: 700;
+}
+
+.playing {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  box-shadow: 0 0 1rem #ffc600;
 }
 
 
