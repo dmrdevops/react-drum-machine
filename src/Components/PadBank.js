@@ -2,22 +2,21 @@ import { useEffect } from "react";
 import DrumPad from "./DrumPad";
 
 export default function PadBank(props) {
-  
   useEffect(() => {
-  document.addEventListener('keydown', handleKeyPress)
-  return () => {
-  document.removeEventListener('keydown', handleKeyPress)
-  }
-  }, [props.powerOn])
-  
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.powerOn]);
 
   function handleKeyPress(e) {
     // Normalize upper and lowercase keystrokes
     const clip = document.getElementById(e.key.toUpperCase());
     if (clip) {
       playClip(clip.childNodes[0]);
-    } //else nothing 
-  } 
+    } //else nothing
+  }
 
   function playClip(clip) {
     if (props.powerOn) {
@@ -25,24 +24,24 @@ export default function PadBank(props) {
         clip.currentTime = 0;
         clip.play();
         // Remove dashes from ID for cleaner display
-        props.updateDisplay( clip.id.replace("-", " ") );
+        props.updateDisplay(clip.id.replace("-", " "));
       }
     }
   }
-  
+
   return (
-    <div className="pad-bank">{
-      props.currentKit.map((currentKit) => {
+    <div className="pad-bank">
+      {props.currentKit.map((currentKit) => {
         return (
           <DrumPad
-          clip={currentKit.url}
-          clipId={currentKit.id}
-          key={currentKit.id.toString()}
-          keyTrigger={currentKit.keyTrigger}
-          playClip={playClip}
+            clip={currentKit.url}
+            clipId={currentKit.id}
+            key={currentKit.id.toString()}
+            keyTrigger={currentKit.keyTrigger}
+            playClip={playClip}
           />
-        )
-      })
-    }</div>
-  )
+        );
+      })}
+    </div>
+  );
 }
