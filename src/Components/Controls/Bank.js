@@ -1,7 +1,6 @@
 import {kitA, kitB} from '../../reference';
-import Knob from './Knob'
 
-const Bank = (props) => {
+const Bank = (props) => { 
   const soundBankSlider =
     props.kitSelected === kitA
     ? { transform: 'rotate(45deg)' }
@@ -22,7 +21,9 @@ const Bank = (props) => {
   return (
     <div className="control-bank">
       <div style={bankColor()} >Bank</div>
-      <Knob handleClick={props.changeSoundBank} handleStyle={soundBankSlider} />
+      <div className='knob' onClick={props.changeBank} >
+        <div className='indicator' style={soundBankSlider} />
+      </div>
     </div>
   )
 }

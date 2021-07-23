@@ -1,56 +1,32 @@
-import React from 'react';
+import { useState } from "react";
 
-class DrumPad extends React.Component {
-  state = {
-    activePad: false
-  }
-  componentDidMount() {
-    const keys = document.querySelectorAll('.drum-pad');
-    document.addEventListener('keydown', this.handleKeyPress)
-  }
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyPress)
-  }
+export default function DrumPad(props) {
+  const [activePad, setActivePad] = useState(false);
 
-  handleKeyPress = (event) => {
-    if(event.keyCode === this.props.keyCode && this.props.powerState) {
-      this.setState(prevState => ({
-        activePad: true
-      }));
-      this.playClip();
-      setTimeout(() => this.setState({ activePad: false}), 100)
-    }
-  }
+  // Figure out animation reset
 
-  playClip = () => {
-    if(this.props.powerState){
-      const clip = document.getElementById(this.props.keyTrigger);
-      clip.currentTime = 0;
-      clip.play();
-      const formatted = this.props.clipId.replace("-", " ");
-      this.props.updateDisplay(formatted);
-    }
+  const playing = {
+    transform: 'scale(1.1)',
+    'border-color': '#ffc600',
+    'box-shadow': '0 0 1rem #ffc600'
   }
   
-  render() {
-    let drumClass = 'drum-pad';
-    if(this.state.activePad) {
-      drumClass += ' playing'
-    }
-    return (
-      <div
-        className={drumClass}
-        id={this.props.clipId}
-        onClick={this.playClip} >
-        <audio
-          className='clip'
-          id={this.props.keyTrigger}
-          src={this.props.clip}
-        />
-        {this.props.keyTrigger}
-      </div>
-    )
-  };
+  return (
+    <div
+      className='drum-pad'
+      id={props.keyTrigger}
+      style={ activePad ? playing : null}
+      onClick={(e) => props.playClip(e.target.childNodes[0])} >
+      <audio
+        className='clip'
+        id={props.clipId}
+        src={props.clip}
+        onPlay={() => 
+          setActivePad(true)
+        }
+        onEnded={() => setActivePad(false)}
+      />
+      {props.keyTrigger}
+    </div>
+  )
 }
-
-export default DrumPad

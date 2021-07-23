@@ -1,15 +1,14 @@
-import { render } from "@testing-library/react"
 import React from 'react'
 import Knob from './Knob'
 
-const Power = (props) => {
+export default function Power(props) {
   const powerKnob =
-  props.powerState
+  props.powerOn
   ? { transform: 'rotate(135deg)' }
   : { transform: 'rotate(45deg)' };
 
   const powerColor = 
-  props.powerState
+  props.powerOn
   ? { color: '#11fa4f',
       webkitTextStrokeWidth: '1px',
       webkitTextStrokeColor: 'black' }
@@ -17,9 +16,7 @@ const Power = (props) => {
   return (
     <div className="control-power" >
       <div style={powerColor}>Power</div>
-      <Knob handleClick={props.pwrToggle} handleStyle={powerKnob} />
+      <Knob handleClick={props.powerToggle} handleStyle={powerKnob} />
     </div>
   )
 }
-
-export default Power

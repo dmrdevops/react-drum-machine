@@ -7,17 +7,17 @@ const Controls = (props) => {
     return (
       <div className="controls-container">
         <Power
-          powerState={props.powerState}
-          pwrToggle={props.pwrToggle}
+          powerOn={props.powerOn}
+          powerToggle={props.powerToggle}
           />
         <Bank
-          changeSoundBank={props.changeSoundBank} 
+          changeBank={props.changeBank} 
           kitSelected={props.kitSelected} 
-          powerState={props.powerState} />
+          powerOn={props.powerOn} />
         <Volume
           changeVolume={props.changeVolume}
           currentVolume={props.currentVolume}
-          powerState={props.powerState} />
+          powerOn={props.powerOn} />
       </div>
     )
 }
