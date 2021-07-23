@@ -1,0 +1,34 @@
+name: Build and deploy React app
+on: 
+  push:
+    branches: main
+jobs:
+  build:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        
+    - name: Install NPM Packages
+      run: npm ci
+     
+    - name: Build project
+      run: npm run build
+    
+    - name: Copy files to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        rm: true
+        source: "./build/*"
+        target: "${{ secrets.REMOTE_DIR }}react-drum-kit"
+        strip_components: 1
